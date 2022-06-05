@@ -10,6 +10,7 @@
             "includePath": [
                 "c:/Users/USER/Desktop/esp_acs712/include",
                 "c:/Users/USER/Desktop/esp_acs712/src",
+                "c:/Users/USER/Desktop/esp_acs712/lib/acs712",
                 "C:/Users/USER/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/config",
                 "C:/Users/USER/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/app_trace",
                 "C:/Users/USER/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/app_update",
@@ -73,7 +74,6 @@
                 "C:/Users/USER/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/fb_gfx",
                 "C:/Users/USER/.platformio/packages/framework-arduinoespressif32/cores/esp32",
                 "C:/Users/USER/.platformio/packages/framework-arduinoespressif32/variants/esp32",
-                "c:/Users/USER/Desktop/esp_acs712/lib/acs712",
                 "C:/Users/USER/.platformio/packages/framework-arduinoespressif32/libraries/ArduinoOTA/src",
                 "C:/Users/USER/.platformio/packages/framework-arduinoespressif32/libraries/AsyncUDP/src",
                 "C:/Users/USER/.platformio/packages/framework-arduinoespressif32/libraries/AzureIoT/src",
@@ -113,6 +113,7 @@
                 "path": [
                     "c:/Users/USER/Desktop/esp_acs712/include",
                     "c:/Users/USER/Desktop/esp_acs712/src",
+                    "c:/Users/USER/Desktop/esp_acs712/lib/acs712",
                     "C:/Users/USER/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/config",
                     "C:/Users/USER/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/app_trace",
                     "C:/Users/USER/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/app_update",
@@ -176,7 +177,6 @@
                     "C:/Users/USER/.platformio/packages/framework-arduinoespressif32/tools/sdk/include/fb_gfx",
                     "C:/Users/USER/.platformio/packages/framework-arduinoespressif32/cores/esp32",
                     "C:/Users/USER/.platformio/packages/framework-arduinoespressif32/variants/esp32",
-                    "c:/Users/USER/Desktop/esp_acs712/lib/acs712",
                     "C:/Users/USER/.platformio/packages/framework-arduinoespressif32/libraries/ArduinoOTA/src",
                     "C:/Users/USER/.platformio/packages/framework-arduinoespressif32/libraries/AsyncUDP/src",
                     "C:/Users/USER/.platformio/packages/framework-arduinoespressif32/libraries/AzureIoT/src",
