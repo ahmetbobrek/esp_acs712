@@ -1,19 +1,27 @@
 #include "acs712.h"
-const int sensorIn = A0;
-ACS712_Irms acs712;
+ACS712 acs712(ACS712_05B, 35);
+int16_t cal;
 
 void setup()
 {
     Serial.begin(9600);
-    acs712.ADCSamples = 1024.0;                // 1024 samples
-    acs712.mVperAmp = scaleFactor::ACS712_20A; // use 100 for 20A Module and 66 for 30A Module and 185 for 5A Module
-    acs712.maxADCVolt = 5.0;                   // 5 Volts
-    acs712.ADCIn = A0;
-    acs712.Init();
+    Serial.println("Calibrating... Ensure that no current flows through the sensor at this moment");
+    int zero = acs712.calibrate();
+    Serial.println("Done!");
+    Serial.println("Zero point for this sensor = " + zero);
+    cal=zero;
 }
 
 void loop()
 {
-    double AmpsRMS = acs712.Process();
-    // Serial.println("Amps RMS: " + String(AmpsRMS));
+    float I = acs712.getCurrentDC();
+
+    // Send it to serial
+    Serial.println(String("I = ") + I + " A");
+    Serial.println(analogRead(35));
+    Serial.println(cal);
+
+
+    // Wait a second before the new measurement
+    delay(1000);
 }
