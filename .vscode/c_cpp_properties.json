@@ -11,6 +11,7 @@
                 "c:/Users/ahmet/Desktop/esp_acs712/include",
                 "c:/Users/ahmet/Desktop/esp_acs712/src",
                 "c:/Users/ahmet/Desktop/esp_acs712/lib/acs712",
+                "c:/Users/ahmet/Desktop/esp_acs712/.pio/libdeps/esp32dev/MQUnifiedsensor/src",
                 "C:/Users/ahmet/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/config",
                 "C:/Users/ahmet/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/newlib/platform_include",
                 "C:/Users/ahmet/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include",
@@ -227,6 +228,7 @@
                     "c:/Users/ahmet/Desktop/esp_acs712/include",
                     "c:/Users/ahmet/Desktop/esp_acs712/src",
                     "c:/Users/ahmet/Desktop/esp_acs712/lib/acs712",
+                    "c:/Users/ahmet/Desktop/esp_acs712/.pio/libdeps/esp32dev/MQUnifiedsensor/src",
                     "C:/Users/ahmet/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/config",
                     "C:/Users/ahmet/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/newlib/platform_include",
                     "C:/Users/ahmet/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include",
@@ -465,8 +467,7 @@
             "compilerArgs": [
                 "-mlongcalls",
                 ""
-            ],
-            "configurationProvider": "ms-vscode.cmake-tools"
+            ]
         }
     ],
     "version": 4

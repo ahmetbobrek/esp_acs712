@@ -2,8 +2,8 @@
 #define ACS712_H
 #include <Arduino.h>
 
-#define ADC_SCALE 1023.0
-#define VREF 5.0
+#define ADC_SCALE 4095
+#define VREF 3.3
 enum ACS712_type {
   ACS712_05B,ACS712_20A,ACS712_30A
 };
@@ -15,6 +15,7 @@ class ACS712{
     void setZeroPoint(int _zero);
     float getCurrentDC();
     float getCurrentAC(uint16_t frequency = 50);
+   
     
 
     
@@ -47,7 +48,7 @@ class ACS712{
   int minValue = 0;  */
   float sensitivity;
   uint8_t pin;
-  int16_t zero=512;  
+  int16_t zero;  
   
 };
 
