@@ -15,6 +15,7 @@ class ACS712{
     void setZeroPoint(int _zero);
     float getCurrentDC();
     float getCurrentAC(uint16_t frequency = 50);
+    uint32_t lsum=0,measurements_count=0;int32_t lnow; uint32_t period; uint32_t t_start;
    
     
 

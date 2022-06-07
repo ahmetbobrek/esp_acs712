@@ -13,10 +13,17 @@ void setup()
 }
 void loop()
 {
-    float I = acs712.getCurrentDC(); 
+    float Irms=acs712.getCurrentAC();
+    //float I = acs712.getCurrentDC(); 
     // Send it to serial
-    Serial.println(String("I = ") + I + " A");
+    //Serial.println(String("I = ") + I + " A");
+    Serial.println(String("Irms = ") + Irms+ " A");
     Serial.println(analogRead(35));
+    Serial.println(acs712.lsum);
+    Serial.println(acs712.lnow);
+     Serial.println(acs712.period);
+     
+
     // Wait a second before the new measurement
     delay(300);
 }
