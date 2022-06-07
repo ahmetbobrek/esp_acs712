@@ -39,17 +39,23 @@ float ACS712::getCurrentDC(){
   
 }
 float ACS712::getCurrentAC(uint16_t frequency){
-  uint32_t period=1000000/frequency;
-  uint32_t t_start=micros();
-  uint32_t lsum=0,measurements_count=0;
-  int32_t lnow;
+  period=1000000/frequency;
+  t_start=micros();
+  /*uint32_t lsum=0,measurements_count=0;
+  int32_t lnow;*/
+  /**/
+  
+  
   while (micros()-t_start<period)
   {
-      lnow=analogRead(pin)-zero;
+      lnow=analogRead(35)-zero;
       lsum+=lnow*lnow;
       measurements_count++;
     float Irms=sqrt(lsum/measurements_count)/ADC_SCALE*VREF/sensitivity;
     return Irms;
+    return lsum;
+    return lnow;
+    return measurements_count;
   }
   
 }
