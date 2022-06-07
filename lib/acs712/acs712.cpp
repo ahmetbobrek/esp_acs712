@@ -17,21 +17,24 @@ int ACS712::calibrate(){
   uint16_t acc=0;
   for (int i = 0; i < 10; i++)
   {
-    acc+=analogRead(pin);
-    zero=acc/10;
-    return zero;
-  }
+    acc+=analogRead(pin);        
+  } 
+   zero=acc/10;
+  return zero;
 }
 void ACS712::setZeroPoint(int _zero){
   zero=_zero;
 }
 float ACS712::getCurrentDC(){
-  int16_t acc=0;
+ int16_t acc;
+
   for (int i = 0; i < 10; i++)
   {
-    acc+=analogRead(pin)-zero;
+    acc=acc+analogRead(35)-zero;
   }
-  float I=(float)acc/10.0/ADC_SCALE*VREF/sensitivity;
+ 
+ float I=(float(acc)*0.1/ADC_SCALE)*VREF/sensitivity;
+ 
   return I;
   
 }
