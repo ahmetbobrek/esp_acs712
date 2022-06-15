@@ -36,10 +36,10 @@ void ACS712::setSensitivity(float sens) {
 
 float ACS712::getCurrentDC() {
 	int16_t acc = 0;
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < 100; i++) {
 		acc += analogRead(pin) - zero;
 	}
-	float I = (float)acc / 10.0 / ADC_SCALE * VREF / sensitivity;
+	float I = (float)acc / 100 / ADC_SCALE * VREF / sensitivity;
 	return I;
 }
 
