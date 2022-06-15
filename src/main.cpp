@@ -5,6 +5,7 @@
 #include "SD.h"
 #include "SPI.h"
 #include"RTClib.h"
+#include"EEPROM.h"
 /*RTC_DS1307 rtc;*/
 RTC_DS1307 rtc;
 /*char daysOfTheWeek[7][12] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};*/
@@ -34,6 +35,9 @@ String sutun5 = "DC akım2";
 String sutun6 = "AC_akım3";
 String sutun7 = "DC_akım3";
 String str = sutun1 + "," + sutun2 + "," + sutun3 + "," + sutun4 + "," + sutun5 + "," + sutun6 + "," + sutun7+"\n\n";
+uint16_t dosya_no;
+String dosya_adi;
+int address=0;
 
 
 ///////////////////////////////SD KART FONKSİYONLARI////////////////////////
@@ -174,18 +178,31 @@ void setup()
   cal1 = acs712_1.calibrate();
   cal2 = acs712_2.calibrate();
   cal3 = acs712_3.calibrate();
+ 
+  dosya_no=EEPROM.readUInt(address);
+  dosya_adi="/akim_data"+String(dosya_no);
+  ///EEPROM
+  /*if (!EEPROM.begin(1000)) {
+    Serial.println("Failed to initialise EEPROM");
+    Serial.println("Restarting...");
+    delay(1000);
+    ESP.restart();
+  }*/
+  if (!EEPROM.begin(1000))
+  {
+    Serial.println("Failed to initialise EEPROM");
+    Serial.println("Restarting...");
+    delay(1000);
+    ESP.restart();
+  }
+  
+
   ////////RTC
   /*if (! rtc.begin()) {
     Serial.println("Couldn't find RTC");
     Serial.flush();
     while (1) delay(10);
-  }*/
-  if (!rtc.begin())
-  {
-    Serial.println("Couldnt find RTC");
-    Serial.flush();
-    while(1) delay(10);
-  }
+  }*/ 
   /*if (! rtc.isrunning()) {
     Serial.println("RTC is NOT running, let's set the time!");
     // When time needs to be set on a new device, or after a power loss, the
@@ -195,11 +212,7 @@ void setup()
     // January 21, 2014 at 3am you would call:
     // rtc.adjust(DateTime(2014, 1, 21, 3, 0, 0));
   }*/
-  if (!rtc.isrunning())
-  {
-    Serial.println("RTC is not running");
-    rtc.adjust(DateTime(2014,1,21,3,0,0));
-  }
+ 
   
 
   ////SD
@@ -234,17 +247,21 @@ void setup()
 
   uint64_t cardSize = SD.cardSize() / (1024 * 1024);
   Serial.printf("SD Card Size: %lluMB\n", cardSize);
-  createDir(SD, "/data");
+  createDir(SD, dosya_adi.c_str());
 
-  writeFile(SD, "/akim_data.txt", str.c_str());
+  writeFile(SD,dosya_adi.c_str(), str.c_str());
   appendFile(SD, "/hello.txt", "World!\n");
+  dosya_no=dosya_no+1;
+  //Serial.printf("Dosya No:%s",dosya_no);
+  EEPROM.writeUInt(address,dosya_no);
+  Serial.println(dosya_no);
 
 }
 
 void loop()
 {
  
-    DateTime now=rtc.now();
+    //DateTime now=rtc.now();
     /*  Serial.println(now.year(),DEC);
     Serial.println(daysOfTheWeek[now.dayOfTheWeek()]);
     DateTime future (now + TimeSpan(7,12,30,6));*/
@@ -253,6 +270,7 @@ void loop()
   
   appendFile(SD, "/akim_data.txt", olcum.c_str());
   Serial.println(olcum);
+  Serial.println(EEPROM.readUInt(address));
 
   delay(300);
 
