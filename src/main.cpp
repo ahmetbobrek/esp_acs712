@@ -38,6 +38,7 @@ String str = sutun1 + "," + sutun2 + "," + sutun3 + "," + sutun4 + "," + sutun5 
 uint16_t dosya_no;
 String dosya_adi;
 int address=0;
+String str1;
 
 
 ///////////////////////////////SD KART FONKSİYONLARI////////////////////////
@@ -177,10 +178,8 @@ void setup()
   /// ACS
   cal1 = acs712_1.calibrate();
   cal2 = acs712_2.calibrate();
-  cal3 = acs712_3.calibrate();
- 
-  dosya_no=EEPROM.readUInt(address);
-  dosya_adi="/akim_data"+String(dosya_no);
+  cal3 = acs712_3.calibrate();  
+  
   ///EEPROM
   /*if (!EEPROM.begin(1000)) {
     Serial.println("Failed to initialise EEPROM");
@@ -195,7 +194,8 @@ void setup()
     delay(1000);
     ESP.restart();
   }
-  
+  dosya_no=EEPROM.readUInt(address);
+  dosya_adi="/akim_data"+String(dosya_no);
 
   ////////RTC
   /*if (! rtc.begin()) {
@@ -247,15 +247,17 @@ void setup()
 
   uint64_t cardSize = SD.cardSize() / (1024 * 1024);
   Serial.printf("SD Card Size: %lluMB\n", cardSize);
-  createDir(SD, dosya_adi.c_str());
+  //createDir(SD, dosya_adi.c_str());
+  str1="/"+dosya_adi+".txt";
 
-  writeFile(SD,dosya_adi.c_str(), str.c_str());
-  appendFile(SD, "/hello.txt", "World!\n");
+  //writeFile(SD,dosya_adi.c_str(), str.c_str());
+  appendFile(SD, str1.c_str(), str.c_str());
+  //appendFile(SD, "/hello.txt", "World!\n");
   dosya_no=dosya_no+1;
   //Serial.printf("Dosya No:%s",dosya_no);
   EEPROM.writeUInt(address,dosya_no);
+  EEPROM.commit();
   Serial.println(dosya_no);
-
 }
 
 void loop()
@@ -268,9 +270,11 @@ void loop()
   String olcum="1,"+String(acs712_1.getCurrentAC())+","+String(acs712_1.getCurrentDC())+","+String(acs712_2.getCurrentAC())+","+String(acs712_2.getCurrentDC())
   +","+String(acs712_3.getCurrentAC())+","+String(acs712_3.getCurrentDC())+"\n";
   
-  appendFile(SD, "/akim_data.txt", olcum.c_str());
+  appendFile(SD,str1.c_str(), olcum.c_str());
+  // appendFile(SD, str1.c_str(), str.c_str());
   Serial.println(olcum);
   Serial.println(EEPROM.readUInt(address));
+  
 
   delay(300);
 
