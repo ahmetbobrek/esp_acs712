@@ -34,11 +34,16 @@ String sutun4 = "AC_akım2";
 String sutun5 = "DC akım2";
 String sutun6 = "AC_akım3";
 String sutun7 = "DC_akım3";
-String str = sutun1 + "," + sutun2 + "," + sutun3 + "," + sutun4 + "," + sutun5 + "," + sutun6 + "," + sutun7+"\n\n";
+String sutun8 = "gecen_Sure_ms";
+String str = sutun1 + "," + sutun2 + "," + sutun3 + "," + sutun4 + "," + sutun5 + "," + sutun6 + "," + sutun7+","+sutun8+"\n\n";
 uint16_t dosya_no;
+uint16_t ornek_no;
 String dosya_adi;
 int address=0;
+int address_1;
 String str1;
+uint32_t baslangic;
+uint32_t gecen;
 
 
 ///////////////////////////////SD KART FONKSİYONLARI////////////////////////
@@ -174,6 +179,7 @@ void appendFile(fs::FS &fs, const char *path, const char *message)
 ////////////////////////////////////////////////////////////
 void setup()
 {
+  ornek_no=1;
   Serial.begin(115200);
   /// ACS
   cal1 = acs712_1.calibrate();
@@ -194,6 +200,8 @@ void setup()
     delay(1000);
     ESP.restart();
   }
+  address_1=address+sizeof(int);
+
   dosya_no=EEPROM.readUInt(address);
   dosya_adi="/akim_data"+String(dosya_no);
 
@@ -262,19 +270,26 @@ void setup()
 
 void loop()
 {
- 
+   
     //DateTime now=rtc.now();
     /*  Serial.println(now.year(),DEC);
     Serial.println(daysOfTheWeek[now.dayOfTheWeek()]);
     DateTime future (now + TimeSpan(7,12,30,6));*/
-  String olcum="1,"+String(acs712_1.getCurrentAC())+","+String(acs712_1.getCurrentDC())+","+String(acs712_2.getCurrentAC())+","+String(acs712_2.getCurrentDC())
-  +","+String(acs712_3.getCurrentAC())+","+String(acs712_3.getCurrentDC())+"\n";
+  Serial.println(address_1);
+  gecen=millis()-baslangic;
+
+  String olcum=String(ornek_no)+","+String(acs712_1.getCurrentAC())+","+String(acs712_1.getCurrentDC())+","+String(acs712_2.getCurrentAC())+","+String(acs712_2.getCurrentDC())
+  +","+String(acs712_3.getCurrentAC())+","+String(acs712_3.getCurrentDC())+","+String(gecen)+"\n";
   
   appendFile(SD,str1.c_str(), olcum.c_str());
   // appendFile(SD, str1.c_str(), str.c_str());
   Serial.println(olcum);
   Serial.println(EEPROM.readUInt(address));
   
+  Serial.println("gecen :");
+  Serial.println(gecen);
+  baslangic=millis();
+  ornek_no+=1;
 
   delay(300);
 

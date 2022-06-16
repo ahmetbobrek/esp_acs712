@@ -11,6 +11,9 @@ RTC_DATA_ATTR struct tm* timeinfo;
 #define OFFSET 0
 #define sleepPeriod 10000000ul;
 String dosya;
+uint64_t baslangic;
+u_int64_t gecen;
+
 
 
 
@@ -115,6 +118,7 @@ void loop()
 {
     // We use 230V because it is the common standard in European countries
   // Change to your local, if necessary
+  baslangic=millis();
   float U = 230;
 
   // To measure current we need to know the frequency of current
@@ -134,6 +138,8 @@ void loop()
   Serial.println(analogRead(4));
  
   Serial.print(cal);
+  gecen=millis()-baslangic;
+  Serial.println(gecen);
 
 
   delay(300);
